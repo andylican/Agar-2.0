@@ -1,0 +1,91 @@
+class Circle {
+    private int x;
+    private int y;
+    private double r;
+    private int xStep;
+    private int yStep;
+    private char letter;
+    private String id;
+    private boolean exist = true;
+    Circle(int x,int y,double r,int xStep,int yStep,char letter,String id) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.xStep = xStep;
+        this.yStep = yStep;
+        this.letter = letter;
+        this.id =  id;
+    }
+    
+    public boolean collide(Circle c) {
+        double dis = Math.sqrt((x-c.getX())*(x-c.getX())+(y-c.getY())*(y-c.getY()));
+        // System.out.println(dis);
+        if(dis <= r+c.r) {
+          //  System.out.println(dis);
+            return true;
+        }
+        return false;
+    }
+    public void eat(Circle c) {
+        double area = c.getR()*c.getR();
+        r = (Math.sqrt(area+r*r));
+    }
+    public void drain() {
+        double area = 50;
+        r = (Math.sqrt(r*r-area));
+        if(r <= 10) {
+            exist = false;
+        }
+    }
+    public void gain() {
+        double area = 50;
+        double oldr = r;
+        r = (Math.sqrt(area+r*r));
+        //System.out.println(r-oldr);
+    }
+    //Getters+setters
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+     public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+     public double getR() {
+        return r;
+    }
+     public int getXStep() {
+        return xStep;
+    }
+    public void setXStep(int xStep) {
+        this.xStep = xStep;
+    }
+    public int getYStep() {
+        return yStep;
+    }
+    public void setYStep(int yStep) {
+        this.yStep = yStep;
+    }
+     public char getLetter() {
+        return letter;
+    }
+     public String getId() {
+        return id;
+    }
+     public void move() {
+         x+=xStep;
+         y+=yStep;
+     }
+     public boolean exists() {
+         return exist;
+     }
+     public void delete() {
+         exist = false;
+     }
+   
+}
